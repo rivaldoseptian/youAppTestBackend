@@ -1,0 +1,8 @@
+services:
+  user-services:
+    build: ./server/src
+    container_name: user-services
+    ports:
+      - "3000:3000"
+    environment:
+      - url=${MonggoDB_URL}
