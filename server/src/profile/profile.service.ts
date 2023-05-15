@@ -11,8 +11,8 @@ export class ProfileService {
     private profileModel: mongoose.Model<Profile>,
   ) {}
 
-  async findProfile(user: User): Promise<Profile> {
-    const profile = await this.profileModel.findOne();
+  async findProfile(userId: string): Promise<Profile> {
+    const profile = await this.profileModel.findOne({ user: userId }).exec();
     return profile;
   }
 

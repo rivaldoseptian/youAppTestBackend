@@ -8,13 +8,11 @@ import { ProfileDto } from './dto/create-user.dto';
 export class ProfileController {
   constructor(private profileservice: ProfileService) {}
 
-  // @Get()
-  // @UseGuards(AuthGuard())
-  // async getProfile(
-  //     @Req() req
-  // ):Promise<Profile>{
-  //     return this.profileservice.findProfile(req.user)
-  // }
+  @Get('/getProfile')
+  @UseGuards(AuthGuard())
+  async getProfile(@Req() req): Promise<Profile> {
+    return this.profileservice.findProfile(req.user);
+  }
 
   @Post('/createProfile')
   @UseGuards(AuthGuard())
@@ -23,7 +21,6 @@ export class ProfileController {
     profile: ProfileDto,
     @Req() req,
   ): Promise<Profile> {
-    console.log(req.user);
     return this.profileservice.create(profile, req.user);
   }
 }
