@@ -22,4 +22,13 @@ export class ProfileService {
     const res = await this.profileModel.create(data);
     return res;
   }
+
+  async Update(userId: string, profile: Profile): Promise<Profile> {
+    const updatedProfile = await this.profileModel.findOneAndUpdate(
+      { user: userId },
+      profile,
+      { new: true },
+    );
+    return updatedProfile;
+  }
 }

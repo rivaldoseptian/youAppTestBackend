@@ -1,4 +1,12 @@
-import { Body, Controller, Get, Post, Req, UseGuards } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Get,
+  Post,
+  Req,
+  UseGuards,
+  Put,
+} from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { Profile } from './schema/profile.schema';
 import { ProfileService } from './profile.service';
@@ -22,5 +30,15 @@ export class ProfileController {
     @Req() req,
   ): Promise<Profile> {
     return this.profileservice.create(profile, req.user);
+  }
+
+  @Put('/profile')
+  @UseGuards(AuthGuard())
+  async update(
+    @Body()
+    profile: ProfileDto,
+    @Req() req,
+  ): Promise<Profile> {
+    return this.profileservice.Update(req.user, profile);
   }
 }
