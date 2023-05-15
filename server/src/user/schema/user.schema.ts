@@ -5,6 +5,15 @@ import { Document } from 'mongoose';
   timestamps: true,
 })
 export class User extends Document {
+  static register(arg0: {
+    email: string;
+    password: string;
+    address: string;
+    phoneNumber: string;
+    name: string;
+  }) {
+    throw new Error('Method not implemented.');
+  }
   @Prop({ unique: [true, 'Email already used'] })
   email: string;
 
